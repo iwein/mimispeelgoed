@@ -19,6 +19,8 @@ object Build extends sbt.Build {
       Compile.akkaActor,
       Compile.sprayCan,
       Compile.sprayServer,
+      Compile.casbah,
+      Compile.salat,
       Test.specs2,
       Container.akkaSlf4j,
       Container.slf4j,
@@ -29,9 +31,10 @@ object Build extends sbt.Build {
 
 object Dependencies {
   val resolutionRepos = Seq(
-    ScalaToolsSnapshots,
+    ScalaToolsSnapshots, ScalaToolsReleases,
     "Typesafe repo" at "http://repo.typesafe.com/typesafe/releases/",
-    "spray repo" at "http://repo.spray.cc/"
+    "spray repo" at "http://repo.spray.cc/",
+    "novus repo" at "http://repo.novus.com/snapshots/"
   )
 
   object V {
@@ -41,12 +44,16 @@ object Dependencies {
     val specs2   = "1.7.1"
     val slf4j    = "1.6.4"
     val logback  = "1.0.0"
+    val casbah   = "2.1.5-1"
+    val salat    = "0.0.8-SNAPSHOT"
   }
 
   object Compile {
     val akkaActor   = "se.scalablesolutions.akka" %  "akka-actor"      % V.akka     % "compile"
     val sprayCan    = "cc.spray"                  %  "spray-can"       % V.sprayCan % "compile"
     val sprayServer = "cc.spray"                  %  "spray-server"    % V.spray    % "compile"
+    val casbah      = "com.mongodb.casbah"        %% "casbah"          % V.casbah   % "compile"
+    val salat       = "com.novus"                 %% "salat-core"      % V.salat    % "compile"
   }
 
   object Test {

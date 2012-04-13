@@ -1,4 +1,4 @@
-package com.example
+package com.mimi
 
 import cc.spray._
 

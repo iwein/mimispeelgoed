@@ -1,4 +1,4 @@
-package com.example
+package com.mimi
 
 import org.specs2.mutable._
 import cc.spray._

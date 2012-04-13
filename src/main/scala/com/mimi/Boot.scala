@@ -1,4 +1,4 @@
-package com.example
+package com.mimi
 
 import org.slf4j.LoggerFactory
 import akka.config.Supervision._
