@@ -1,5 +1,30 @@
-<div class="control-group">
-  <label class=" span2" >{{label}}
-  </label>
-  <input type="text"  class="suggestable-input" class=" span3">
+{{#products}}
+<div class="span6">
+  <div class="thumbnail">
+    <div class=row>
+
+      <img class="span3" src="{{imageLink}}" alt="{{title}}">
+
+      <div class="span2">
+        <h2>{{title}}</h2>
+
+        <p>{{description}}</p>
+
+        <div class="paypal-button">
+          <form method="post" action="https://www.paypal.com/cgi-bin/webscr" target="paypal">
+            <input type="hidden" value="_s-xclick" name="cmd">
+            <input type="hidden" value="{{paymentLink}}" name="hosted_button_id">
+            <input type="image" border="0" alt="PayPal, de veilige en complete manier van online betalen." name="submit"
+                   src="https://www.paypal.com/nl_NL/NL/i/btn/btn_cart_LG.gif">
+            <img width="1" height="1" border="0" src="https://www.paypal.com/nl_NL/i/scr/pixel.gif" alt="">
+          </form>
+        </div>
+
+      </div>
+    </div>
+    <!--/span-->
+  </div>
+  <!-- /row -->
 </div>
+<!-- /span -->
+{{/products}}
