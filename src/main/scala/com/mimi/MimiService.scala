@@ -1,8 +1,12 @@
 package com.mimi
 
 import cc.spray._
+import utils.Logging
 
-trait MimiService extends Directives {
+import cc.spray.json._
+import com.mimi.domain.MimiJsonProtocol._
+
+trait MimiService extends Directives with Repository with Logging {
 
   val staticResourceService = {
     path("") {
@@ -13,6 +17,17 @@ trait MimiService extends Directives {
     } ~
     pathPrefix("js|img|css".r) {
       (matched) => getFromResourceDirectory("www/" + matched)
+    }
+  }
+
+  val productService = {
+    path("products") {
+      get {
+        _.complete({
+          log.info("Listing products")
+          listProducts.toJson.toString
+        })
+      }
     }
   }
 

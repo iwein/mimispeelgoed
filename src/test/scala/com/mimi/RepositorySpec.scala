@@ -10,11 +10,7 @@ import StatusCodes._
 import com.novus.salat._
 import com.novus.salat.global._
 
-class RepositorySpec extends Specification with Repository {
-
-  val mimiProduct: MimiProduct = MimiProduct(
-    "Title", "description", "https://payment", "http://image", List("tag", "tog", "tug")
-  )
+class RepositorySpec extends Specification with Repository with TestData {
 
   "The MimiRepository" should {
     "return a list of products" in {

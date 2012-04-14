@@ -18,9 +18,10 @@ object Boot extends App {
   val port = Option(System.getenv("PORT")).getOrElse("8080").toInt
 
   val httpService    = Actor.actorOf(new HttpService(mainModule.staticResourceService))
+  val productService    = Actor.actorOf(new HttpService(mainModule.productService))
 //  val postService    = Actor.actorOf(new HttpService(mainModule.postService))
 
-  val rootService    = Actor.actorOf(new SprayCanRootService(httpService))
+  val rootService    = Actor.actorOf(new SprayCanRootService(httpService, productService))
   val sprayCanServer = Actor.actorOf(new HttpServer(new ServerConfig(host = host, port = port)))
 
   Supervisor(
@@ -28,7 +29,7 @@ object Boot extends App {
       OneForOneStrategy(List(classOf[Exception]), 3, 100),
       List(
         Supervise(httpService, Permanent),
-//        Supervise(postService, Permanent),
+        Supervise(productService, Permanent),
         Supervise(rootService, Permanent),
         Supervise(sprayCanServer, Permanent)
       )

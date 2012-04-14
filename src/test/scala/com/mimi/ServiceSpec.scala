@@ -10,12 +10,12 @@ import StatusCodes._
 class ServiceSpec extends Specification with SprayTest with MimiService {
   
   "The MimiService" should {
-    "return a greeting for GET requests to the root path" in {
+    "return the index for GET requests to the root path" in {
       testService(HttpRequest(GET, "/")) {
         staticResourceService
       }.response.content.as[String].right.getOrElse("Failed") must contain ("MimiSpeelgoed")
     }
-    "leave GET requests to other paths unhandled" in {
+    "leave GET requests to random paths unhandled" in {
       testService(HttpRequest(GET, "/kermit")) {
         staticResourceService
       }.handled must beFalse
@@ -24,6 +24,12 @@ class ServiceSpec extends Specification with SprayTest with MimiService {
       testService(HttpRequest(POST, "/")) {
         staticResourceService
       }.response mustEqual HttpResponse(MethodNotAllowed, "HTTP method not allowed, supported methods: GET")
+    }
+    "return a list of products on /products" in {
+      val result = testService(HttpRequest(GET, "/products")) {
+        productService
+      }
+      result.handled must beTrue
     }
   }
   

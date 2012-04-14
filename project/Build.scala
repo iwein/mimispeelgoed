@@ -19,6 +19,7 @@ object Build extends sbt.Build {
       Compile.akkaActor,
       Compile.sprayCan,
       Compile.sprayServer,
+      Compile.sprayJson,
       Compile.casbah,
       Compile.salat,
       Test.specs2,
@@ -40,6 +41,7 @@ object Dependencies {
   object V {
     val akka     = "1.3.1"
     val spray    = "0.9.0"
+    val sprayJson= "1.1.1"
     val sprayCan = "0.9.3"
     val specs2   = "1.7.1"
     val slf4j    = "1.6.4"
@@ -52,6 +54,7 @@ object Dependencies {
     val akkaActor   = "se.scalablesolutions.akka" %  "akka-actor"      % V.akka     % "compile"
     val sprayCan    = "cc.spray"                  %  "spray-can"       % V.sprayCan % "compile"
     val sprayServer = "cc.spray"                  %  "spray-server"    % V.spray    % "compile"
+    val sprayJson   = "cc.spray"                  %% "spray-json"      % V.sprayJson% "compile"
     val casbah      = "com.mongodb.casbah"        %% "casbah"          % V.casbah   % "compile"
     val salat       = "com.novus"                 %% "salat-core"      % V.salat    % "compile"
   }
