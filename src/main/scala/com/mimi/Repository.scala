@@ -24,8 +24,8 @@ trait Repository {
     })
   }
 
-  def listTags : List[String] = {
-    listProducts.flatMap(_.tags)
+  def listTags : Set[String] = {
+    listProducts.foldLeft(Set.empty[String])(_ ++ _.tags)
   }
 
 }

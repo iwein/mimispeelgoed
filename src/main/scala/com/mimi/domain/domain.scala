@@ -4,4 +4,4 @@ case class MimiProduct(title: String
                        , description: String
                        , paymentLink: String
                        , imageLink: String
-                       , tags: List[String] = List.empty)
+                       , tags: Set[String] = Set.empty)

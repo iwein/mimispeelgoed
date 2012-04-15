@@ -23,7 +23,8 @@ class RepositorySpec extends Specification with Repository with TestData {
     "return a list of labels" in {
       MongoRepository.products.drop()
       MongoRepository.products.insert(mimiProduct)
-      listTags must_== List("tag", "tog", "tug")
+      MongoRepository.products.insert(mimiProduct.copy(tags = Set("tag", "tig")))
+      listTags must_== Set("tag", "tog", "tug", "tig")
     }
   }
   
