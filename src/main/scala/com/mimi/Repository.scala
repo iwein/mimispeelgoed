@@ -24,6 +24,10 @@ trait Repository {
     })
   }
 
+  def listTags : List[String] = {
+    listProducts.flatMap(_.tags)
+  }
+
 }
 
 object MongoRepository extends Logging with ConfigurationParser {

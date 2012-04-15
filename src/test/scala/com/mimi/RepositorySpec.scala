@@ -20,7 +20,11 @@ class RepositorySpec extends Specification with Repository with TestData {
       println(products)
       products must contain (mimiProduct)
     }
-
+    "return a list of labels" in {
+      MongoRepository.products.drop()
+      MongoRepository.products.insert(mimiProduct)
+      listTags must_== List("tag", "tog", "tug")
+    }
   }
   
 }

@@ -25,7 +25,15 @@ trait MimiService extends Directives with Repository with Logging {
       get {
         _.complete({
           log.info("Listing products")
-          listProducts.toJson.toString
+          listProducts.toJson.toString()
+        })
+      }
+    } ~
+    path ("tags") {
+      get {
+        _.complete({
+          log.info("Listing tags")
+          listTags.toJson.toString()
         })
       }
     }
