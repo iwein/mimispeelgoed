@@ -1,6 +1,6 @@
 Mimi Speelgoed
 =======
 
-Webshop made by iwein voor handgemaakt babyspeelgoed made by marte
+Webshop made by iwein for handmade babytoys made by marte
 
 
