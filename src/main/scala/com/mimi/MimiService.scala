@@ -33,7 +33,7 @@ trait MimiService extends Directives with Repository with Logging {
       get {
         _.complete({
           log.info("Listing tags")
-          listTags.toJson.toString()
+          Map("tags"->listTags).toJson.toString()
         })
       }
     }
