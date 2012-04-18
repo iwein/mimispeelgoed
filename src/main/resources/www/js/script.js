@@ -1,35 +1,35 @@
-var TagsModel = Backbone.Model.extend({
-  defaults: {
-    "tags" : []
-  },
-  url: "tags"
+var Tags = (function (Backbone) {
+  var TagsModel = Backbone.Model.extend({
+    defaults: {
+      "tags" : []
+    },
+    url: "tags"
 
-});
+  });
 
-var TagsView = Backbone.View.extend({
-  el: "#tags-filter",
+  var TagsView = Backbone.View.extend({
+    el: "#tags-filter",
 
-  render: function() {
-    $(this.el).html($(Mustache.render(templates.tags, _.clone(this.model.attributes))));
-  },
+    render: function() {
+      $(this.el).html($(Mustache.render(templates.tags, _.clone(this.model.attributes))));
+    },
 
-  events: {
-    "click .label" : "toggleActiveLabel"
-  },
+    events: {
+      "click .label" : "toggleActiveLabel"
+    },
 
-  toggleActiveLabel: function(event) {
-    console.log(event);
-    $(event.currentTarget).toggleClass("label-info active-tag");
-    showProductsForActiveTags();
-  }
-});
+    toggleActiveLabel: function(event) {
+      $(event.currentTarget).toggleClass("label-info active-tag");
+      showProductsForActiveTags();
+    }
+  });
 
-var tagsModel = new TagsModel();
+  var tagsModel = new TagsModel();
 
-var tagsView = new TagsView({model:tagsModel});
+  var tagsView = new TagsView({model:tagsModel});
 
 
-var showProductsForActiveTags = function() {
+  var showProductsForActiveTags = function() {
     var activeTags = [];
     $("#tags-filter .active-tag").each(function() {
       activeTags.push($(this).text());
@@ -47,33 +47,28 @@ var showProductsForActiveTags = function() {
         $(self).hide();
       }
     });
+  };
+
+  tagsModel.on("change", function() {
+    tagsView.render();
+  });
+
+  return {
+    View: tagsView,
+    Model: tagsModel
   }
+}(Backbone));
 
 var templates = new Object();
 
 
 $(document).ready(function() {
-  tagsModel.fetch();
-
   $.ajax({
           url: "templates/tags.html",
           type: "GET",
           success: function(tagsTemplate) {
             templates.tags = tagsTemplate;
-            tagsModel.on("change", function(){
-              console.log("Changed!");
-              tagsView.render();
-            });
-//            $.ajax({
-//              url: "tags",
-//              type: "GET",
-//              success: function(jsonTags) {
-//                var data = new Object();
-//                data.tags = eval(jsonTags);
-//                console.log(jsonTags);
-//                $("#tags-filter").html($(Mustache.render(tagsTemplate, data)));
-//              }
-//            });
+            Tags.Model.fetch();
           }
         }
   );
