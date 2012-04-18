@@ -6,7 +6,7 @@ import utils.Logging
 import cc.spray.json._
 import com.mimi.domain.MimiJsonProtocol._
 
-trait MimiService extends Directives with Repository with Logging {
+trait OilService extends Directives with Repository with Logging {
 
   val staticResourceService = {
     path("") {

@@ -7,9 +7,9 @@ import http._
 import HttpMethods._
 import StatusCodes._
 
-class ServiceSpec extends Specification with SprayTest with MimiService {
+class ServiceSpec extends Specification with SprayTest with OilService {
   
-  "The MimiService" should {
+  "The OilService" should {
     "return the index for GET requests to the root path" in {
       testService(HttpRequest(GET, "/")) {
         staticResourceService

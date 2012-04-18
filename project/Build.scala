@@ -6,11 +6,11 @@ import com.typesafe.startscript.StartScriptPlugin
 object Build extends sbt.Build {
   import Dependencies._
 
-  lazy val myProject = Project("mimispeelgoed", file("."))
+  lazy val myProject = Project("oil-exchange", file("."))
     .settings(StartScriptPlugin.startScriptForClassesSettings: _*)
     .settings(Revolver.settings: _*)
     .settings(
-    organization := "nl.mimispeelgoed",
+    organization := "com.oilexchange",
     version := "0.9.0",
     scalaVersion := "2.9.1",
     scalacOptions := Seq("-deprecation", "-encoding", "utf8"),
