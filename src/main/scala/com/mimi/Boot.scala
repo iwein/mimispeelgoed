@@ -10,7 +10,7 @@ object Boot extends App {
 
   LoggerFactory.getLogger(getClass) // initialize SLF4J early
 
-  val mainModule = new MimiService {
+  val mainModule = new MimiService with MongoRepository {
     // bake your module cake here
   }
 

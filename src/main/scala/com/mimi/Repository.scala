@@ -1,6 +1,6 @@
 package com.mimi
 
-import domain.MimiProduct
+import domain.{Template, MimiProduct}
 import util.parsing.json.JSON
 import util.matching.Regex
 import cc.spray.utils.Logging
@@ -18,21 +18,34 @@ import com.novus.salat.global._
  */
 
 trait Repository {
+  def listProducts : List[MimiProduct]
+
+  def listTags : Set[String]
+
+  def getTemplate (name: String) : Option[String]
+
+}
+
+trait MongoRepository extends Repository with Logging with ConfigurationParser {
+
   def listProducts : List[MimiProduct] = {
-    MongoRepository.products.find()
+    productsCollection.find()
   }
 
   def listTags : Set[String] = {
     listProducts.foldLeft(Set.empty[String])(_ ++ _.tags)
   }
 
-}
-
-object MongoRepository extends Logging with ConfigurationParser {
+  def getTemplate (name: String) : Option[String] = {
+    log.info("Looking for template:" + name)
+    templatesCollection.findByQuery(MongoDBObject("name"->name)).map(_.content)
+  }
 
   RegisterJodaTimeConversionHelpers()
 
-  val products = new AutoClosingMongoCollection[MimiProduct](buildMongoDb, "products")
+  val productsCollection = new AutoClosingMongoCollection[MimiProduct](buildMongoDb, "products")
+
+  val templatesCollection = new AutoClosingMongoCollection[Template](buildMongoDb, "templates")
 
   lazy val (mongoUri, username, password)  = extractMongoConnectionParameters
 
@@ -56,6 +69,12 @@ class AutoClosingMongoCollection[Type <: CaseClass](mongo: MongoDB, collectionNa
   def find() (implicit ctx: Context, m: Manifest[Type]) : List[Type] =  {
     doWithCollection(c => {
       c.find().map(grater[Type].asObject(_)).toList
+    })
+  }
+
+  def findByQuery(query: MongoDBObject) (implicit ctx: Context, m: Manifest[Type]) : Option[Type] =  {
+    doWithCollection(c => {
+      c.findOne(query).map(grater[Type].asObject(_))
     })
   }
 

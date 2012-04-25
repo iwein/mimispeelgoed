@@ -5,25 +5,23 @@ import org.specs2.mutable._
 import cc.spray._
 import test._
 import http._
-import HttpMethods._
-import StatusCodes._
 import com.novus.salat._
 import com.novus.salat.global._
 
-class RepositorySpec extends Specification with Repository with TestData {
+class RepositorySpec extends Specification with MongoRepository with TestData {
 
   "The MimiRepository" should {
     "return a list of products" in {
-      MongoRepository.products.drop()
-      MongoRepository.products.insert(mimiProduct)
+      productsCollection.drop()
+      productsCollection.insert(mimiProduct)
       val products: List[MimiProduct] = listProducts
       println(products)
       products must contain (mimiProduct)
     }
     "return a list of labels" in {
-      MongoRepository.products.drop()
-      MongoRepository.products.insert(mimiProduct)
-      MongoRepository.products.insert(mimiProduct.copy(tags = Set("tag", "tig")))
+      productsCollection.drop()
+      productsCollection.insert(mimiProduct)
+      productsCollection.insert(mimiProduct.copy(tags = Set("tag", "tig")))
       listTags must_== Set("tag", "tog", "tug", "tig")
     }
   }

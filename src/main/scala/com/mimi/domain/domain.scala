@@ -5,3 +5,5 @@ case class MimiProduct(title: String
                        , paymentLink: String
                        , imageLink: String
                        , tags: Set[String] = Set.empty)
+
+case class Template(name: String,  content: String)

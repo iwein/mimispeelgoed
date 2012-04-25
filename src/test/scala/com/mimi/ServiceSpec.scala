@@ -1,14 +1,25 @@
 package com.mimi
 
+import domain.MimiProduct
 import org.specs2.mutable._
 import cc.spray._
 import test._
 import http._
 import HttpMethods._
 import StatusCodes._
+import org.slf4j.LoggerFactory
 
-class ServiceSpec extends Specification with SprayTest with MimiService {
-  
+trait StubRepository extends Repository {
+  def listProducts = List(MimiProduct("theTitle", "theDescription", "thePaymentLink", "theImageLink", Set("tag")))
+
+  def listTags = Set("tag")
+
+  def getTemplate(name: String) = Some("prettyTemplate")
+}
+
+class ServiceSpec extends Specification with SprayTest with MimiService with StubRepository {
+  LoggerFactory.getLogger(getClass)
+
   "The MimiService" should {
     "return the index for GET requests to the root path" in {
       testService(HttpRequest(GET, "/")) {
@@ -30,6 +41,13 @@ class ServiceSpec extends Specification with SprayTest with MimiService {
         productService
       }
       result.handled must beTrue
+    }
+    "get a template from the Repository" in {
+      val result = testService(HttpRequest(GET, "/templates/whatever.html")) {
+        staticResourceService
+      }
+      result.handled must beTrue
+      result.response mustEqual HttpResponse(OK, "prettyTemplate")
     }
   }
   
