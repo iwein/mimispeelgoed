@@ -1,13 +1,3 @@
-.product {
-  margin-bottom: 20px
-}
-
-.thumbnail {
-  -webkit-box-shadow: 0 4px 4px rgba(0,0,0.075);
-  -mox-box-shadow: 0 4px 4px rgba(0,0,0.075);
-  box-shadow: 0 4px 4px rgba(0,0,0.075);
-}
-
 /* HTML5 Boilerplate  */
 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }

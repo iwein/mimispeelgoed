@@ -17,13 +17,8 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/excite-bike/jquery-ui-1.8.18.custom.css" type="text/css">
   <link rel="stylesheet" href="css/bootstrap.css">
-  <style>
-    body {
-      padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-    }
-  </style>
   <link href="css/bootstrap-responsive.css" rel="stylesheet">
-
+  <link href="css/mimi-overrides.css" rel="stylesheet">
   <script src="js/libs/modernizr-2.5.3.min.js"></script>
 </head>
 <body>
@@ -45,6 +40,7 @@
           <li class="active"><a href="#">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><img src="http://cdn1.iconfinder.com/data/icons/mapicons/icons/construction.png"></li>
         </ul>
       </div>
     </div>
@@ -55,14 +51,47 @@
 <div class="container-fluid">
   <div class="row">
     <!--/span-->
-    <div class="span12">
+    <div class="span8">
       <div class="hero-unit">
-        <h2>Welkom bij MimiSpeelgoed!</h2>
 
-        <p>Hier koop je handgemaakt babyspeelgoed zoals kraakdoekjes, bijtringen en knuffels met kraakoren</p>
+          <h2>Welkom bij MiMi Speelgoed!</h2>
 
+          <p>Hier koop je handgemaakt babyspeelgoed zoals kraakdoekjes, bijtringen en amigurumi.</p>
+
+          <p>De producten zijn nog niet geregistreerd op paypal. Neem contact op via twitter als je iets wilt bestellen.</p>
       </div>
     </div>
+    <div class="span4">
+      <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+      <script>
+        new TWTR.Widget({
+          version: 2,
+          type: 'profile',
+          rpp: 3,
+          interval: 30000,
+          width: 'auto',
+          height: 150,
+          theme: {
+            shell: {
+              background: '#5e1413',
+              color: '#f4e7db'
+            },
+            tweets: {
+              background: '#f4e7db',
+              color: '#5e1413',
+              links: '#000000'
+            }
+          },
+          features: {
+            scrollbar: false,
+            loop: false,
+            live: false,
+            behavior: 'all'
+          }
+        }).render().setUser('mimispeelgoed').start();
+      </script>
+    </div>
+
     <!--/span-->
   </div>
   <!--/row-->
@@ -83,7 +112,7 @@
   <hr>
 
   <footer>
-    <p>&copy; Iwein Fuld 2012</p>
+    <p>&copy; Marte Fuld-Israël en Iwein Fuld 2012</p>
   </footer>
 
 </div>

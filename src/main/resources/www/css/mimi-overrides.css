@@ -1,0 +1,21 @@
+.product {
+  margin-bottom: 20px;
+}
+
+.thumbnail {
+  -webkit-box-shadow: 0 4px 4px rgba(0,0,0.075);
+  -mox-box-shadow: 0 4px 4px rgba(0,0,0.075);
+  box-shadow: 0 4px 4px rgba(0,0,0.075);
+  border: none;
+  background-color: #F4E7DB;
+  color: #5E1413;
+}
+
+.hero-unit {
+  background-color: #5E1413;
+  color: #F4E7DB;
+}
+
+body {
+  padding-top: 60px;
+}
