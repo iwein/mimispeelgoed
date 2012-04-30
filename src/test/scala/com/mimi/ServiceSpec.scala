@@ -10,7 +10,9 @@ import StatusCodes._
 import org.slf4j.LoggerFactory
 
 trait StubRepository extends Repository {
-  def listProducts = List(MimiProduct("theTitle", "theDescription", "thePaymentLink", "theImageLink", Set("tag")))
+  val products = scala.collection.mutable.MutableList.empty[MimiProduct]
+
+  def listProducts = List(MimiProduct("theTitle", "theDescription", Some("thePaymentLink"), "theImageLink", Set("tag")))
 
   def listTags = Set("tag")
 

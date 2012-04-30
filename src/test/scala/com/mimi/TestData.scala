@@ -5,6 +5,6 @@ import domain.MimiProduct._
 
 trait TestData {
   val mimiProduct: MimiProduct = MimiProduct(
-    "Title", "description", "https://payment", "http://image", Set("tag", "tog", "tug")
+    "Title", "description", Some("paymentLink"), "http://image", Set("tag", "tog", "tug")
   )
 }

@@ -10,6 +10,7 @@
 
         <p>{{description}}</p>
 
+        {{#paymentLink}}
         <div class="paypal-button">
           <form method="post" action="https://www.paypal.com/cgi-bin/webscr" target="paypal">
             <input type="hidden" value="_s-xclick" name="cmd">
@@ -19,6 +20,7 @@
             <img width="1" height="1" border="0" src="https://www.paypal.com/nl_NL/i/scr/pixel.gif" alt="">
           </form>
         </div>
+        {{/paymentLink}}
       </div>
     </div>
     <!--/span-->
