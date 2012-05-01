@@ -55,7 +55,56 @@ var Tags = (function (Backbone) {
 
   return {
     View: tagsView,
-    Model: tagsModel
+    Model: tagsModel,
+  }
+}(Backbone));
+
+var App = (function(Backbone){
+  var MainRouter = Backbone.Router.extend({
+    routes: {
+      "about":"renderAbout",
+      "":"renderHome"
+      //,
+//      "contact":"renderContact"
+    },
+    renderHome:function() {
+      console.log("Fetching products.html");
+      $.ajax(
+        { url:"templates/product.html",
+          type: "GET",
+          success: function(productTemplate) {
+            $.ajax(
+                  { url:"products",
+                    type: "GET",
+                    success: function(json) {
+                      console.log("Rendering products");
+                      var data = new Object();
+                      data.products = eval(json);
+                      console.log(data);
+                      var elem = $(Mustache.render(productTemplate, data));
+                      $("#content-container").html(elem);
+                      $("#product-controls").show();
+                    }
+                  });
+          }
+        });
+    },
+    renderAbout:function() {
+      console.log("Fetching about.html");
+      $.ajax(
+            { url:"templates/about.html",
+              type: "GET",
+              success: function(aboutTemplate) {
+                console.log("Rendering about");
+                var elem = $(Mustache.render(aboutTemplate));
+                $("#content-container").html(elem);
+                $("#product-controls").hide();
+              }
+            });
+    }
+  });
+  return {
+    Router: new MainRouter()
   }
 }(Backbone));
 
@@ -63,6 +112,7 @@ var templates = new Object();
 
 
 $(document).ready(function() {
+  Backbone.history.start();
   $.ajax({
           url: "templates/tags.html",
           type: "GET",
@@ -85,7 +135,7 @@ $(document).ready(function() {
                       data.products = eval(json);
                       console.log(data);
                       var elem = $(Mustache.render(productTemplate, data));
-                      $("#product-container").html(elem);
+                      $("#content-container").html(elem);
                     }
                   });
           }
