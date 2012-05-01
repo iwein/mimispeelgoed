@@ -16,6 +16,14 @@
   color: #F4E7DB;
 }
 
+.hero-unit a {
+  color: #9acd32;
+}
+
+.hero-unit a:visited {
+  color: #ffb6c1;
+}
+
 body {
   padding-top: 60px;
 }
