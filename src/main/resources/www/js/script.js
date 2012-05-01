@@ -55,17 +55,16 @@ var Tags = (function (Backbone) {
 
   return {
     View: tagsView,
-    Model: tagsModel,
+    Model: tagsModel
   }
 }(Backbone));
 
 var App = (function(Backbone){
   var MainRouter = Backbone.Router.extend({
     routes: {
+      "":"renderHome",
       "about":"renderAbout",
-      "":"renderHome"
-      //,
-//      "contact":"renderContact"
+      "contact":"renderContact"
     },
     renderHome:function() {
       console.log("Fetching products.html");
@@ -101,6 +100,19 @@ var App = (function(Backbone){
                 $("#product-controls").hide();
               }
             });
+    },
+    renderContact:function() {
+      console.log("Fetching contact.html");
+      $.ajax(
+            { url:"templates/contact.html",
+              type: "GET",
+              success: function(aboutTemplate) {
+                console.log("Rendering contact");
+                var elem = $(Mustache.render(aboutTemplate));
+                $("#content-container").html(elem);
+                $("#product-controls").hide();
+              }
+            });
     }
   });
   return {
@@ -119,27 +131,10 @@ $(document).ready(function() {
           success: function(tagsTemplate) {
             templates.tags = tagsTemplate;
             Tags.Model.fetch();
+            App.Router.renderHome();
           }
         }
   );
-
-  $.ajax(
-        { url:"templates/product.html",
-          type: "GET",
-          success: function(productTemplate) {
-            $.ajax(
-                  { url:"products",
-                    type: "GET",
-                    success: function(json) {
-                      var data = new Object();
-                      data.products = eval(json);
-                      console.log(data);
-                      var elem = $(Mustache.render(productTemplate, data));
-                      $("#content-container").html(elem);
-                    }
-                  });
-          }
-        });
 });
 
 
