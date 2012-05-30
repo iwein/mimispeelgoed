@@ -11,16 +11,28 @@ var Tags = (function (Backbone) {
     el: "#tags-filter",
 
     render: function() {
-      $(this.el).html($(Mustache.render(templates.tags, _.clone(this.model.attributes))));
+      ResourceCache.doWithResource("templates/tags.html", function(cache, context){
+        $(context.el).html($(Mustache.render(cache["templates/tags.html"], _.clone(context.model.attributes))));
+      } , this);
     },
 
     events: {
-      "click .label" : "toggleActiveLabel"
+      "click .label" : "toggleActiveLabel",
+      "click button#all-labels": "selectAllLabels",
+      "click button#no-labels": "selectNoLabels"
     },
 
     toggleActiveLabel: function(event) {
       $(event.currentTarget).toggleClass("label-info active-tag");
       showProductsForActiveTags();
+    },
+
+    selectAllLabels: function(event) {
+      //
+    },
+
+    selectNoLabels: function(event) {
+      //
     }
   });
 
@@ -59,7 +71,50 @@ var Tags = (function (Backbone) {
   }
 }(Backbone));
 
+var ResourceCache = (function() {
+  var cache = {};
+
+  return {
+    loadResources:function(urls) {
+      _.each(urls, function(url){
+        if (!cache[url]) $.get(url);
+      });
+    },
+
+    doWithResource:function(url, callback, context) {
+     var resource = cache[url];
+     if (!resource) {
+       $.get(url, function(data){
+         cache[url] = data;
+         callback(cache, context)
+       })
+     } else {
+       callback(cache, context);
+     }
+    },
+
+    doWithResources:function(urls, callback, context) {
+      var self = this;
+
+      var doIt = _.after(urls.length, callback);
+      _.each(urls, function(url){
+        self.doWithResource(url, doIt, context);
+      })
+    }
+  };
+
+})();
+
 var App = (function(Backbone){
+
+  var Product = Backbone.Model.extend({});
+
+  var Products = Backbone.Collection.extend({
+    url: '/products',
+    model: Product
+  });
+
+
   var MainRouter = Backbone.Router.extend({
     routes: {
       "":"renderHome",
@@ -67,27 +122,20 @@ var App = (function(Backbone){
       "contact":"renderContact"
     },
     renderHome:function() {
-      console.log("Fetching products.html");
-      $.ajax(
-        { url:"templates/product.html",
-          type: "GET",
-          success: function(productTemplate) {
-            $.ajax(
-                  { url:"products",
-                    type: "GET",
-                    success: function(json) {
-                      console.log("Rendering products");
-                      var data = new Object();
-                      data.products = eval(json);
-                      console.log(data);
-                      var elem = $(Mustache.render(productTemplate, data));
-                      $("#content-container").html(elem);
-                      $("#product-controls").show();
-                    }
-                  });
-          }
-        });
+      console.log("Render Home - Fetching products.html");
+      ResourceCache.doWithResources(["templates/product.html", "products"], function(cache){
+        var products = {products: eval(cache["products"])};
+        var template = cache["templates/product.html"];
+        var elem = $(Mustache.render(template, products));
+        $("#content-container").html(elem);
+        $("#product-controls").show();
+      });
     },
+
+    renderProducts: function() {
+      console.log('render products here...');
+    },
+
     renderAbout:function() {
       console.log("Fetching about.html");
       $.ajax(
@@ -124,17 +172,16 @@ var templates = new Object();
 
 
 $(document).ready(function() {
+  ResourceCache.loadResources(["templates/tags.html",
+    "templates/product.html",
+    "templates/contact.html",
+    "templates/about.html"
+  ]);
+
   Backbone.history.start();
-  $.ajax({
-          url: "templates/tags.html",
-          type: "GET",
-          success: function(tagsTemplate) {
-            templates.tags = tagsTemplate;
-            Tags.Model.fetch();
-            App.Router.renderHome();
-          }
-        }
-  );
+  ResourceCache.doWithResource("templates/tags.html", function(tagsTemplate) {
+    Tags.Model.fetch();
+  });
 });
 
 
