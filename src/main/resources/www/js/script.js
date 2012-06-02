@@ -208,6 +208,7 @@ var App = (function (Backbone) {
     }
 }(Backbone));
 
+<<<<<<< HEAD
 var ResourceCache = (function () {
     var cache = {};
 
@@ -241,6 +242,8 @@ var ResourceCache = (function () {
     };
 })();
 
+=======
+>>>>>>> ca9e61f4a4a6f4665cd7430c0e56ac2e91352029
 $(document).ready(function () {
     App.initialize();
 });
