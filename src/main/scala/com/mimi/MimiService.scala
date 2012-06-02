@@ -1,7 +1,8 @@
 package com.mimi
 
 import cc.spray._
-import directives.SprayRoute1
+import http.HttpResponse
+import cc.spray.http.HttpHeaders._
 import utils.Logging
 
 import cc.spray.json._
@@ -36,21 +37,30 @@ trait MimiService extends Directives with Repository with Logging {
     }
   }
 
+  def addEtagHeaders(response: HttpResponse) = {
+    val etag = CustomHeader("ETag", response.content.hashCode.toString)
+    response.copy(headers = etag :: response.headers)
+  }
+
   val productService = {
     path("products") {
-      get {
-        _.complete({
-          log.info("Listing products")
-          listProducts.toJson.toString()
-        })
+      transformResponse(addEtagHeaders) {
+        get {
+          _.complete({
+            log.info("Listing products")
+            listProducts.toJson.toString()
+          })
+        }
       }
     } ~
     path ("tags") {
-      get {
-        _.complete({
-          log.info("Listing tags")
-          Map("tags"->listTags).toJson.toString()
-        })
+      transformResponse(addEtagHeaders) {
+        get {
+          _.complete({
+            log.info("Listing tags")
+            Map("tags" -> listTags).toJson.toString()
+          })
+        }
       }
     }
   }
