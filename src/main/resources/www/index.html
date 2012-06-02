@@ -8,113 +8,119 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title></title>
-  <meta name="description" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
 
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/excite-bike/jquery-ui-1.8.18.custom.css" type="text/css">
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link href="css/bootstrap-responsive.css" rel="stylesheet">
-  <link href="css/mimi-overrides.css" rel="stylesheet">
-  <script src="js/libs/modernizr-2.5.3.min.js"></script>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/excite-bike/jquery-ui-1.8.18.custom.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/mimi-overrides.css" rel="stylesheet">
+    <script src="js/libs/modernizr-2.5.3.min.js"></script>
 </head>
 <body>
 <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a
-  different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to
-  experience this site.</p><![endif]-->
+    different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a>
+    to
+    experience this site.</p><![endif]-->
 <div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand" href="#">MiMi made by Marte</a>
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#">MiMi made by Marte</a>
 
-      <div class="nav-collapse">
-        <ul class="nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><img src="http://cdn1.iconfinder.com/data/icons/mapicons/icons/construction.png"></li>
-        </ul>
-      </div>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><img src="http://cdn1.iconfinder.com/data/icons/mapicons/icons/construction.png"></li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
 <div class="container-fluid">
-  <div class="row">
-    <!--/span-->
-    <div class="span8">
-      <div class="hero-unit">
+    <div class="row">
+        <!--/span-->
+        <div class="span8">
+            <div class="hero-unit">
 
-          <h2>Welkom bij MiMi made by Marte</h2>
+                <h2>Welkom bij MiMi made by Marte</h2>
 
-          <p>Hier koop je handgemaakt babyspeelgoed zoals kraakdoekjes, bijtringen en amigurumi.</p>
+                <p>Hier koop je handgemaakt babyspeelgoed zoals kraakdoekjes, bijtringen en amigurumi.</p>
 
-          <p>De producten zijn nog niet geregistreerd op paypal.
-            Neem contact op via het <a href="#contact">contact formulier</a> of via twitter als je iets wilt bestellen.</p>
-      </div>
+                <p>De producten zijn nog niet geregistreerd op paypal.
+                    Neem contact op via het <a href="#contact">contact formulier</a> of via twitter als je iets wilt
+                    bestellen.</p>
+            </div>
+        </div>
+        <div class="span4">
+            <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+            <script>
+                new TWTR.Widget({
+                    version:2,
+                    type:'profile',
+                    rpp:3,
+                    interval:30000,
+                    width:'auto',
+                    height:150,
+                    theme:{
+                        shell:{
+                            background:'#5e1413',
+                            color:'#f4e7db'
+                        },
+                        tweets:{
+                            background:'#f4e7db',
+                            color:'#5e1413',
+                            links:'#000000'
+                        }
+                    },
+                    features:{
+                        scrollbar:false,
+                        loop:false,
+                        live:false,
+                        behavior:'all'
+                    }
+                }).render().setUser('mimispeelgoed').start();
+            </script>
+        </div>
+
+        <!--/span-->
     </div>
-    <div class="span4">
-      <script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
-      <script>
-        new TWTR.Widget({
-          version: 2,
-          type: 'profile',
-          rpp: 3,
-          interval: 30000,
-          width: 'auto',
-          height: 150,
-          theme: {
-            shell: {
-              background: '#5e1413',
-              color: '#f4e7db'
-            },
-            tweets: {
-              background: '#f4e7db',
-              color: '#5e1413',
-              links: '#000000'
-            }
-          },
-          features: {
-            scrollbar: false,
-            loop: false,
-            live: false,
-            behavior: 'all'
-          }
-        }).render().setUser('mimispeelgoed').start();
-      </script>
+    <!--/row-->
+    <div id="product-controls" class="row">
+        <div class="span12">
+            <div class="alert alert-info">
+                <a class="close" data-dismiss="alert">×</a>
+
+                <p>Klik op de labels om producten te filteren. Alleen producten met labels die actief zijn worden
+                    getoond.</p>
+            </div>
+            <p>
+                <span id="tags-filter"></span>
+            </p>
+        </div>
+    </div>
+    <!--/row-->
+    <div class="row-fluid">
+        <ul id="content-container" class="thumbnails"></ul>
     </div>
 
-    <!--/span-->
-  </div>
-  <!--/row-->
-  <div id="product-controls" class="row">
-    <div class="span12">
-      <div class="alert alert-info">
-        <a class="close" data-dismiss="alert">×</a>
-        <p>Klik op de labels om producten te filteren. Alleen producten met labels die actief zijn worden getoond.</p>
-      </div>
-      <p><span id="tags-filter"></span><button id="all-labels">alles</button><button id="no-labels">niets</button> </p>
-    </div>
-  </div>
-  <!--/row-->
-  <div class="row-fluid">
-    <ul id="content-container" class="thumbnails"></ul>
-  </div>
+    <hr>
 
-  <hr>
-
-  <footer>
-    <p>&copy; Marte Fuld-Israël en Iwein Fuld 2012</p>
-  </footer>
+    <footer>
+        <p>&copy; Marte Fuld-Israël en Iwein Fuld 2012</p>
+    </footer>
 
 </div>
 <!--/.fluid-container-->

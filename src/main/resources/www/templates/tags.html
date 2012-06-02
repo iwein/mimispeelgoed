@@ -1,1 +1,5 @@
-    {{#tags}}<span class="label label-info active-tag">{{.}}</span> {{/tags}}
+    <div>
+        {{#tags}}<span class="label {{#enabled}}label-info active-tag{{/enabled}}">{{tag}}</span> {{/tags}}
+        <span id="all-labels" class="label label-info active-tag">alles</span>
+        <span id="no-labels" class="label label-info active-tag">niets</span>
+    </div>
