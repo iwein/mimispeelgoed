@@ -6,6 +6,7 @@ function log(msg) {
 }
 
 var Tags = (function (Backbone) {
+
     var TagsModel = Backbone.Model.extend({
         defaults:{
             tag: "",
@@ -90,6 +91,7 @@ var Tags = (function (Backbone) {
 
 
 var ProductsModule = (function (Backbone) {
+
     var Product = Backbone.Model.extend({
         matchesTags: function(tags) {
             var modelTags = this.get('tags');
@@ -119,6 +121,7 @@ var ProductsModule = (function (Backbone) {
 
 
 var App = (function (Backbone) {
+
     function renderInContentContainer(view) {
         if (this.containerView) {
             this.containerView.remove();
@@ -208,7 +211,6 @@ var App = (function (Backbone) {
     }
 }(Backbone));
 
-<<<<<<< HEAD
 var ResourceCache = (function () {
     var cache = {};
 
@@ -242,8 +244,6 @@ var ResourceCache = (function () {
     };
 })();
 
-=======
->>>>>>> ca9e61f4a4a6f4665cd7430c0e56ac2e91352029
 $(document).ready(function () {
     App.initialize();
 });
