@@ -207,8 +207,6 @@ var App = (function (Backbone) {
     }
 }(Backbone));
 
-var templates = new Object();
-
 $(document).ready(function () {
     App.initialize();
 });
